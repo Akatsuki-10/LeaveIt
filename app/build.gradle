@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -16,11 +17,29 @@ android {
         versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        signingConfigs{
+            releaseInternal {
+                storeFile file("release-internal.keystore")
+                storePassword releaseInternalKeystorePwd
+                keyAlias keyAliasValue
+                keyPassword releaseInternalKeystoreKeyAliasPws
+            }
+        }
     }
 
     buildTypes {
+        debug {
+        }
+        releaseInternal {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.releaseInternal
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
