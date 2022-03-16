@@ -1,4 +1,4 @@
-package sr17.test.leaveit
+package sr17.test.leaveit.view
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
+import sr17.test.leaveit.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,15 +17,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        callToCrashApp()
+        toCrashApp()
         setContentView(R.layout.activity_main)
     }
 
-    private fun loadLateInItVariables() {
+    private fun initializeLateInitVariables() {
         firebaseAnalytics = Firebase.analytics
     }
 
-    private fun callToCrashApp() {
+    private fun toCrashApp() {
         FirebaseCrashlytics.getInstance().setCustomKey("justForTesting","testing 003")
         Log.e("Called", unInitializedVariable)
     }
@@ -37,7 +38,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun turnOffMobile() {
-        finish()
-    }
 }

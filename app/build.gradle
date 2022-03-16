@@ -20,7 +20,7 @@ android {
 
         signingConfigs{
             releaseInternal {
-                storeFile file("release-internal.keystore")
+                storeFile file("signing_certificate.jks")
                 storePassword releaseInternalKeystorePwd
                 keyAlias keyAliasValue
                 keyPassword releaseInternalKeystoreKeyAliasPws
@@ -30,6 +30,7 @@ android {
 
     buildTypes {
         debug {
+            signingConfig signingConfigs.releaseInternal
         }
         releaseInternal {
             minifyEnabled true
